@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        {%include 'nave.html' %}
+            <div class="row mt-4">
+                <h3>Lista de Contatos</h3>
+
+                <form method="get" class="row">
+                    <div class="col-9">
+                        <input type="text" name="pesquisa" class="form-control">
+                    </div>
+                    <div class="col-3">
+                        <button type="submit" class="btn btn-dark">Pesquisar</button>
+                    </div>
+                    
+                </form>
+
+                <div class="col-12">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>E-mail</th>
+                                <th>Assunto</th>
+                                <th>Respondido</th>
+                            </tr>
+                        </thead>
+                        <body>
+                            <tr>
+                                {% for linha in context['dados'] %}
+                                <tr>
+                                    <td>{{linha.nome}}</td>
+                                    <td>{{linha.email}}</td>
+                                    <td>{{linha.assunto}}</td>
+                                    <td >
+                                        {% if linha.respondido == 1 %}
+                                            SIM
+                                        {%else%}
+                                            NÃO
+                                        {% endif %}
+
+                                    </td>
+                                    <td><a href="{{url_for('contatoDetail', id=linha.id)}}"><img src="{{url_for('static', filename='img/seta.png')}}" style="width: 30px;"></a></td>
+                                </tr>
+                                {% endfor %}
+                            </tr>
+                        </body>
+                    </table>
+                </div>
+            </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        {%include 'nave.html' %}
+            <div class="row mt-4">
+                <h3>Lista de Pots</h3>
+
+                <div class="col-12">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Post</th>
+                                <th>Usuário</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <body>
+                            <tr>
+                                {% for linha in posts %}
+                                <tr>
+                                    <td>{{linha.msg_resumo()}}</td>
+                                    <td>{{linha.user.nome}}</td>
+                                    <td><a href="{{url_for('PostComentarios', id=linha.id)}}"><img src="{{url_for('static', filename='img/seta.png')}}" style="width: 30px;"></a></td>
+                                    
+                                </tr>
+                                {% endfor %}
+                            </tr>
+                        </body>
+                    </table>
+                </div>
+            </div>
+    </div>
+{% endblock %}
